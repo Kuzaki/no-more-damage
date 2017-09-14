@@ -6,7 +6,7 @@ module.exports = function NoMoreDamage(D){
 		cid;
 	D.hook('S_LOGIN',3,e=>{cid=e.cid})
 	D.hook('S_EACH_SKILL_RESULT',3,e=>{
-		if(!SHOW_DAMAGE && e.cid.toString() != cid.toString()) return SHOW_DAMAGE;
+		if(!SHOW_DAMAGE && e.source.toString() != cid.toString()) return SHOW_DAMAGE;
 	});
 
 	command.add('showdmg',()=>{
