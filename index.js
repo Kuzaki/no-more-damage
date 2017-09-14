@@ -2,10 +2,11 @@ const Command = require('command');
 
 module.exports = function NoMoreDamage(D){
 	const command = Command(D);
-	let SHOW_DAMAGE = true;
-
-	D.hook('S_EACH_SKILL_RESULT','raw',code=>{
-		if(!SHOW_DAMAGE) return SHOW_DAMAGE;
+	let SHOW_DAMAGE = true,
+		cid;
+	D.hook('S_LOGIN',3,e=>{cid=e.cid})
+	D.hook('S_EACH_SKILL_RESULT',3,e=>{
+		if(!SHOW_DAMAGE && e.cid.toString() != cid.toString()) return SHOW_DAMAGE;
 	});
 
 	command.add('showdmg',()=>{
